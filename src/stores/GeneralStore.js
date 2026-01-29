@@ -29,6 +29,8 @@ export const GeneralStore = defineStore('general',{
     },
 
     getters:{
-        getShowStartPanel: (state) => state.startPanel
+        getShowStartPanel: (state) => state.startPanel,
+        getBoardWidth: (state)=> state.boardWidth,
+        getBoardHeight: (state)=> state.boardHeight
     }
 })

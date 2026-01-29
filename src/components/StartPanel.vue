@@ -1,5 +1,7 @@
 <script setup>
 import StartPanelBoard from '@/components/StartPanelBoard.vue';
+import StartPanelBoardInfo from '@/components/StartPanelBoardInfo.vue';
+import StartButton from '@/components/StartButton.vue';
 
 </script>
 
@@ -8,6 +10,8 @@ import StartPanelBoard from '@/components/StartPanelBoard.vue';
         <h1 class="text-xl text-center">Board dimensions</h1>
         <table class="w-full table-fixed border-collapse">
             <StartPanelBoard/>
+            <StartPanelBoardInfo/>
+            <StartButton/>
         </table>
 
 

@@ -8,7 +8,7 @@ const rows = 12
 const cols = 12
 
 const start = ref({ row: 1, col: 1 })
-const end = ref({ row: 3, col: 4 })
+const end = ref({ row: generalStore.getBoardWidth, col: generalStore.getBoardHeight })
 
 let prevStart = { ...start.value };
 let prevEnd = { ...end.value };
