@@ -1,16 +1,17 @@
 <script setup>
-import Board from './Board.vue';
-import StartPanel from './StartPanel.vue';
-import { GeneralStore } from '@/stores/GeneralStore';
+import Board from '@/components/Board.vue';
+import StartPanel from '@/components/StartPanel.vue';
+import { useGeneralStore } from '@/stores/GeneralStore';
 
-const generalStore = GeneralStore()
+const generalStore = useGeneralStore()
 
 
 </script>
 
 <template>
-    <main class="min-h-screen bg-gray-100 p-4">
-        <StartPanel v-if="generalStore.getShowStartPanel" />
-        <Board v-else />
+    <main class="bg-gray-100 p-4">
+        <Board v-if="generalStore.gameRunning" />
+        <StartPanel v-else />
+        
     </main>
 </template>

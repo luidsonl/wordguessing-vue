@@ -1,7 +1,7 @@
 <script setup>
-import { GeneralStore } from '@/stores/GeneralStore';
+import { useGeneralStore } from '@/stores/GeneralStore';
 
-const generalStore = GeneralStore()
+const generalStore = useGeneralStore()
 </script>
 
 <template>

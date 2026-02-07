@@ -1,21 +1,21 @@
 import { defineStore } from "pinia";
 
-export const GeneralStore = defineStore('general',{
+export const useGeneralStore = defineStore('general',{
     state(){
         return {
-            startPanel: true,
+            gameRunning: false,
             boardWidth: 5,
             boardHeight: 5
         }
     },
 
     actions: {
-        setFalseStartPanel(){
-            this.startPanel = false;
+        startGame(){
+            this.gameRunning = true;
         },
 
-        setTrueStartPanel(){
-            this.startPanel = true;
+        stopGame(){
+            this.gameRunning = false;
         },
 
         setBoardDimensions(width, heigth){
@@ -25,6 +25,10 @@ export const GeneralStore = defineStore('general',{
             this.boardWidth = width;
             this.boardHeight = heigth;
             return true;
+        },
+        resetPanel(){
+            this.boardWidth = 5;
+            this.boardHeight = 5;
         }
     },
 

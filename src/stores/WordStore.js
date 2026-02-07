@@ -41,6 +41,10 @@ export const useWordStore = defineStore('word', {
             const pattern = '?'.repeat(length);
             const url = `https://api.datamuse.com/words?ml=${similar}&sp=${pattern}`;
             await this.fetchWord(url);
+        },
+        
+        clearWord() {
+            this.value = '';
         }
     },
 

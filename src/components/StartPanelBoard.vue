@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import { GeneralStore } from '@/stores/GeneralStore';
+import { useGeneralStore } from '@/stores/GeneralStore';
 
-const generalStore = GeneralStore()
+const generalStore = useGeneralStore()
 
 const rows = 12
 const cols = 12
