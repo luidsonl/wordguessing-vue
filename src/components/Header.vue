@@ -8,7 +8,6 @@ const wordStore = useWordStore();
 function resetGame() {
     generalStore.stopGame();
     generalStore.resetPanel();
-    wordStore.clearWord();
 }
 </script>
 

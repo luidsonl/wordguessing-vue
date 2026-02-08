@@ -3,7 +3,6 @@ import { defineStore } from 'pinia'
 export const useWordStore = defineStore('word', {
     state() {
         return {
-            value: '',
             isLoading: false,
             error: null
         }
@@ -19,9 +18,9 @@ export const useWordStore = defineStore('word', {
 
                 if (data.length > 0) {
                     const randomIndex = Math.floor(Math.random() * data.length);
-                    this.value = data[randomIndex].word;
+                    return data[randomIndex].word;
                 } else {
-                    this.value = '';
+                    return false;
                 }
             } catch (err) {
                 this.error = "Erro ao buscar palavra";
@@ -42,13 +41,24 @@ export const useWordStore = defineStore('word', {
             const url = `https://api.datamuse.com/words?ml=${similar}&sp=${pattern}`;
             await this.fetchWord(url);
         },
-        
-        clearWord() {
-            this.value = '';
-        }
-    },
 
-    getters: {
-        getWord: (state) => state.value
+        async isValidWord(word){
+            this.isLoading = true;
+            this.error = null;
+            try {
+                const response = await fetch(`https://api.datamuse.com/words?sp=${word}&max=1`);
+                const data = await response.json();
+
+                if (data.length > 0 && data[0].word.toLowerCase() === word.toLowerCase()) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error requesting api:", error);
+            }finally{
+                this.isLoading = false;
+            }
+        }
     }
 })

@@ -6,7 +6,7 @@ const wordStore = useWordStore();
 const generalStore = useGeneralStore()
 
 function startGame() {
-    const word = wordStore.newWordWithLength(generalStore.getBoardWidth);
+    const word = wordStore.newWordWithLength(generalStore.boardWidth);
     wordStore.newWordWithLength(word);
     generalStore.startGame();
 }

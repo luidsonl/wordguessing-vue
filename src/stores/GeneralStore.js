@@ -5,7 +5,11 @@ export const useGeneralStore = defineStore('general',{
         return {
             gameRunning: false,
             boardWidth: 5,
-            boardHeight: 5
+            boardHeight: 5,
+            currentWord: '',
+            secretWord: '',
+            wordsTried: [],
+            message: {}
         }
     },
 
@@ -29,12 +33,25 @@ export const useGeneralStore = defineStore('general',{
         resetPanel(){
             this.boardWidth = 5;
             this.boardHeight = 5;
-        }
-    },
+        },
+        updateCurrentWord(word){
+            this.currentWord = word
+        },
 
-    getters:{
-        getShowStartPanel: (state) => state.startPanel,
-        getBoardWidth: (state)=> state.boardWidth,
-        getBoardHeight: (state)=> state.boardHeight
+        updateSecredWord(word){
+            this.updateSecredWord = word
+        },
+
+        addWordTried(word){
+            this.wordsTried.push(word)
+        },
+
+        updateMessage(message, color){
+            this.message = {message, color}
+        },
+
+        clearMessage(){
+            this.message = {}
+        }
     }
 })

@@ -6,8 +6,8 @@ const generalStore = useGeneralStore()
 
 <template>
     <div class="text-lg font-semibold">
-        Word lenght: {{ generalStore.getBoardWidth }} |
-        Tries: {{generalStore.getBoardHeight}}
+        Word lenght: {{ generalStore.boardWidth }} |
+        Tries: {{generalStore.boardHeight}}
       
     </div>
 </template>
