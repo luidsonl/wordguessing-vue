@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { useGeneralStore } from '@/stores/GeneralStore';
 
 const generalStore = useGeneralStore()
-
 const rows = 12
 const cols = 12
 
@@ -17,7 +16,6 @@ const isSelecting = ref(false)
 
 function onAreaChange(dimensions) {
   const success = generalStore.setBoardDimensions(dimensions.width, dimensions.height);
-
   if (success) {
     prevStart = { ...start.value };
     prevEnd = { ...end.value };
@@ -38,6 +36,24 @@ function enterCell(r, c) {
   end.value = { row: r, col: c }
 }
 
+function handleTouchMove(e) {
+  if (!isSelecting.value) return
+  
+  if (e.cancelable) e.preventDefault();
+
+  const touch = e.touches[0];
+  const el = document.elementFromPoint(touch.clientX, touch.clientY);
+  const cell = el?.closest('.grid-cell');
+  
+  if (cell) {
+    const r = parseInt(cell.getAttribute('data-row'));
+    const c = parseInt(cell.getAttribute('data-col'));
+    if (r && c) {
+      end.value = { row: r, col: c };
+    }
+  }
+}
+
 function stopSelect() {
   if (!isSelecting.value) return
   isSelecting.value = false
@@ -52,27 +68,30 @@ function isSelected(r, c) {
   const maxRow = Math.max(start.value.row, end.value.row)
   const minCol = Math.min(start.value.col, end.value.col)
   const maxCol = Math.max(start.value.col, end.value.col)
-
   return r >= minRow && r <= maxRow && c >= minCol && c <= maxCol
 }
-
 </script>
 
 <template>
   <div class="space-y-4">
     <table
-      class="w-full table-fixed border-collapse select-none"
+      class="w-full table-fixed border-collapse select-none touch-none" 
       @mouseup="stopSelect"
       @mouseleave="stopSelect"
+      @touchend="stopSelect"
+      @touchmove="handleTouchMove"
     >
       <tbody>
         <tr v-for="r in rows" :key="r">
           <td
             v-for="c in cols"
             :key="c"
-            class="border p-0"
+            class="border p-0 grid-cell"
+            :data-row="r"
+            :data-col="c"
             @mousedown="startSelect(r,c)"
             @mouseenter="enterCell(r,c)"
+            @touchstart.passive="startSelect(r,c)"
           >
             <div
               class="aspect-square w-full transition"
