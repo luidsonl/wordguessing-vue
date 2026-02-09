@@ -32,12 +32,12 @@ const getLetterClass = (letter, rowIndex, colIndex) => {
 
 <template>
 
-    <div class="border p-2 rounded max-w-md mx-auto bg-white text-2xl">
+    <div class="border p-2 rounded max-w-md mx-auto bg-white text-2xl mb-5 pb-5">
         <div v-for="i in boardHeight" :key="i" class="mx-auto flex justify-center">
             <div
                 v-for="j in boardWidth"
                 :key="j"
-                class="w-20 h-20 border-b mx-2 flex items-end justify-center"
+                class="w-20 min-h-10 border-b mx-2 flex items-end justify-center border-b-black"
                 :class="getLetterClass(wordsTried[i - 1]?.[j - 1], i - 1, j - 1)"
             >
                 <span v-if="wordsTried[i - 1]?.[j - 1]">

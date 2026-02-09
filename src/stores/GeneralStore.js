@@ -4,7 +4,6 @@ export const useGeneralStore = defineStore('general', {
     state() {
         return {
             gameRunning: false,
-            gameWon: false,
             boardWidth: 5,
             boardHeight: 5,
             currentWord: '',
@@ -36,15 +35,15 @@ export const useGeneralStore = defineStore('general', {
             this.boardHeight = 5;
         },
         updateCurrentWord(word) {
-            this.currentWord = word
+            this.currentWord = word.toLowerCase();
         },
 
         updateSecretWord(word) {
-            this.secretWord = word
+            this.secretWord = word.toLowerCase()
         },
 
         addWordTried(word) {
-            this.wordsTried.push(word)
+            this.wordsTried = [...this.wordsTried, word.toLowerCase()];
         },
 
         updateMessage(message, color) {
@@ -53,6 +52,25 @@ export const useGeneralStore = defineStore('general', {
 
         clearMessage() {
             this.message = {}
+        },
+
+        reset(){
+            this.stopGame()
+            this.resetPanel(),
+            this.updateCurrentWord('')
+            this.updateMessage({})
+            this.updateSecretWord('')
+            this.wordsTried = []
+        }
+    },
+
+    getters:{
+        isWinner: (state)=>{
+            return state.wordsTried.includes(state.secretWord)
+        },
+        gameOver: (state)=>{
+            if(!state.wordsTried) return false;
+            return state.wordsTried.length >= state.boardHeight || state.wordsTried.includes(state.secretWord);
         }
     }
 })

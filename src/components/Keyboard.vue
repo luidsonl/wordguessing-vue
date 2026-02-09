@@ -70,9 +70,9 @@ async function submitWord() {
 </script>
 
 <template>
-    <div class="flex flex-col justify-center items-center">
+    <div class="flex flex-col justify-center items-center text-2xl mb:text-lg">
         <div v-for="row in keyRows" :key="row.join('')">
-            <button v-for="key in row" :key="key" @click="handleKey(key)" class="border rounded-b-sm m-1 p-1 active:bg-gray-300">
+            <button v-for="key in row" :key="key" @click="handleKey(key)" class="border rounded-b-sm m-1 p-1 bg-white active:bg-gray-300">
                 {{ key }}
             </button>
         </div>

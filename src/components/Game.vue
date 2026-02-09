@@ -1,6 +1,7 @@
 <script setup>
 import Board from './Board.vue';
 import GameMessage from './GameMessage.vue';
+import GameOver from './GameOver.vue';
 import Keyboard from './Keyboard.vue';
 
 import { useGeneralStore } from '@/stores/GeneralStore';
@@ -20,5 +21,7 @@ const wordStore = useWordStore();
     />
     </div>
     <Board/>
-    <Keyboard/>
+    <GameOver v-if="generalStore.gameOver"/>
+    <Keyboard v-else/>
+    
 </template>
