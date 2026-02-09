@@ -1,9 +1,10 @@
 import { defineStore } from "pinia";
 
-export const useGeneralStore = defineStore('general',{
-    state(){
+export const useGeneralStore = defineStore('general', {
+    state() {
         return {
             gameRunning: false,
+            gameWon: false,
             boardWidth: 5,
             boardHeight: 5,
             currentWord: '',
@@ -14,43 +15,43 @@ export const useGeneralStore = defineStore('general',{
     },
 
     actions: {
-        startGame(){
+        startGame() {
             this.gameRunning = true;
         },
 
-        stopGame(){
+        stopGame() {
             this.gameRunning = false;
         },
 
-        setBoardDimensions(width, heigth){
-            if(width < 3 && heigth >= 1){
+        setBoardDimensions(width, heigth) {
+            if (width < 3 && heigth >= 1) {
                 return false;
             }
             this.boardWidth = width;
             this.boardHeight = heigth;
             return true;
         },
-        resetPanel(){
+        resetPanel() {
             this.boardWidth = 5;
             this.boardHeight = 5;
         },
-        updateCurrentWord(word){
+        updateCurrentWord(word) {
             this.currentWord = word
         },
 
-        updateSecredWord(word){
-            this.updateSecredWord = word
+        updateSecretWord(word) {
+            this.secretWord = word
         },
 
-        addWordTried(word){
+        addWordTried(word) {
             this.wordsTried.push(word)
         },
 
-        updateMessage(message, color){
-            this.message = {message, color}
+        updateMessage(message, color) {
+            this.message = { message, color }
         },
 
-        clearMessage(){
+        clearMessage() {
             this.message = {}
         }
     }

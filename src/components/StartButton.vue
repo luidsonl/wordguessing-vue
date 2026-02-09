@@ -5,10 +5,15 @@ import { useWordStore } from '@/stores/WordStore';
 const wordStore = useWordStore();
 const generalStore = useGeneralStore()
 
-function startGame() {
-    const word = wordStore.newWordWithLength(generalStore.boardWidth);
-    wordStore.newWordWithLength(word);
+async function startGame() {
     generalStore.startGame();
+    generalStore.updateMessage('Getting data', 'blue')
+    const word = await wordStore.newWordWithLength(generalStore.boardWidth);
+    generalStore.updateSecretWord(word);
+    if(!word){
+        generalStore.stopGame();
+    }
+    generalStore.clearMessage();
 }
 
 </script>

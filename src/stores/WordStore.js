@@ -33,7 +33,8 @@ export const useWordStore = defineStore('word', {
         async newWordWithLength(length) {
             const pattern = '?'.repeat(length);
             const url = `https://api.datamuse.com/words?sp=${pattern}`;
-            await this.fetchWord(url);
+            const word = await this.fetchWord(url);
+            return word;
         },
 
         async newWordWithLengthSimilar(length, similar) {
