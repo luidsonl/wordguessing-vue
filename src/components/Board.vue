@@ -32,7 +32,7 @@ const getLetterClass = (letter, rowIndex, colIndex) => {
 
 <template>
 
-    <div class=" mx-auto">
+    <div class="flex justify-center">
         <div class="mx-2 border p-2 rounded max-w-md bg-white text-2xl mb-5 pb-5">
             <div v-for="i in boardHeight" :key="i" class="mx-2 flex justify-center">
                 <div
