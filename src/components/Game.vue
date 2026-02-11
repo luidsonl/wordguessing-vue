@@ -12,7 +12,7 @@ const wordStore = useWordStore()
 </script>
 
 <template>
-    <div>
+    <div class="max-w-200">
         <div class="min-h-20">
             <GameMessage v-if="generalStore.message.message" :message="generalStore.message.message" :color="generalStore.message.color" />
         </div>

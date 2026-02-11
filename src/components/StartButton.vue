@@ -18,7 +18,7 @@ async function startGame() {
 </script>
 
 <template>
-    <div class="flex justify-center">
+    <div class="flex justify-center mt-3">
         <button class="cursor-pointer px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors cursor" v-on:click="startGame">Start</button>
     </div>
 </template>

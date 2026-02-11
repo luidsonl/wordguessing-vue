@@ -18,36 +18,36 @@ const getLetterClass = (letter, rowIndex, colIndex) => {
     if (!secret) return ''
 
     if (secret[colIndex] === upperLetter) {
-        return 'bg-green-500 text-white'
+        return 'bg-green-500 text-white border-transparent'
     }
 
     if (secret.includes(upperLetter)) {
-        return 'bg-yellow-400 text-white'
+        return 'bg-yellow-400 text-white border-transparent'
     }
 
-    return 'bg-gray-200'
+    return 'bg-gray-200 text-gray-500 border-transparent'
 }
 
 const letterSizeClass = computed(() => {
     const w = boardWidth.value
 
-    if (w <= 4) return 'text-3xl'
-    if (w <= 6) return 'text-2xl'
-    if (w <= 8) return 'text-xl'
-    if (w <= 10) return 'text-lg'
-    return 'text-sm'
+    if (w <= 4) return 'text-2xl sm:text-3xl md:text-4xl'
+    if (w <= 6) return 'text-2xl sm:text-3xl md:text-4xl'
+    if (w <= 8) return 'text-xl sm:text-2xl md:text-3xl'
+    if (w <= 10) return 'text-lg sm:text-xl md:text-2xl'
+    return 'text-sm sm:text-lg md:text-xl'
 })
 </script>
 
 <template>
-    <div class="flex justify-center px-2">
-        <div class="border p-2 rounded bg-white w-full max-w-screen-sm sm:max-w-md md:max-w-lg mb-5">
-            <div v-for="i in boardHeight" :key="i" class="grid gap-2" :style="`grid-template-columns: repeat(${boardWidth}, minmax(0, 1fr))`">
+    <div class="flex justify-center px-2 w-full">
+        <div class="border p-2 rounded bg-white w-full max-w-sm sm:max-w-md md:max-w-lg mb-5 shadow-sm">
+            <div v-for="i in boardHeight" :key="`row-${i}`" class="grid gap-2 mb-2" :style="{ gridTemplateColumns: `repeat(${boardWidth}, minmax(0, 1fr))` }">
                 <div
                     v-for="j in boardWidth"
-                    :key="j"
-                    class="aspect-square border-b border-b-black flex items-end justify-center font-bold"
-                    :class="(getLetterClass(wordsTried[i - 1]?.[j - 1], i - 1, j - 1), letterSizeClass)"
+                    :key="`col-${j}`"
+                    class="aspect-square border-b-2 border-b-black flex items-end justify-center font-bold pb-1 transition-colors duration-500"
+                    :class="[getLetterClass(wordsTried[i - 1]?.[j - 1], i - 1, j - 1), letterSizeClass, !wordsTried[i - 1]?.[j - 1] ? 'border-b-black' : '']"
                 >
                     <span v-if="wordsTried[i - 1]?.[j - 1]">
                         {{ wordsTried[i - 1][j - 1]?.toUpperCase() }}
