@@ -1,24 +1,23 @@
 <script setup>
-import { useGeneralStore } from '@/stores/GeneralStore';
-import { useWordStore } from '@/stores/WordStore';
-import { storeToRefs } from 'pinia';
+import { useGeneralStore } from '@/stores/GeneralStore'
+import { useWordStore } from '@/stores/WordStore'
+import { storeToRefs } from 'pinia'
 
-const generalStore = useGeneralStore();
-const wordStore = useWordStore();
+const generalStore = useGeneralStore()
+const wordStore = useWordStore()
 
-const { currentWord, wordsTried, boardWidth, boardHeight } = storeToRefs(generalStore);
-
+const { currentWord, wordsTried, boardWidth, boardHeight } = storeToRefs(generalStore)
 
 const keyRows = [
     ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P'],
     ['A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L'],
-    ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DEL']
+    ['ENTER', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', 'DEL'],
 ]
 
 function handleKey(key) {
     generalStore.clearMessage()
 
-    if(boardHeight.value < wordsTried.value.length){
+    if (boardHeight.value < wordsTried.value.length) {
         console.error('No more tries')
         return
     }
@@ -43,29 +42,29 @@ function removeLetter() {
 }
 
 async function submitWord() {
-    if (currentWord.value.length !== boardWidth.value){
-        generalStore.updateMessage('Word too short', 'red');
-        return;
+    if (currentWord.value.length !== boardWidth.value) {
+        generalStore.updateMessage('Word too short', 'red')
+        return
     }
 
-    if(wordsTried.value.includes(currentWord.value)){
-        generalStore.updateMessage('Word already used', 'red');
-        return;
+    if (wordsTried.value.includes(currentWord.value)) {
+        generalStore.updateMessage('Word already used', 'red')
+        return
     }
 
-    const valid = await wordStore.isValidWord(currentWord.value);
-    if(!valid){
-        generalStore.updateMessage('Invalid word', 'red');
-        return;
+    const valid = await wordStore.isValidWord(currentWord.value)
+    if (!valid) {
+        generalStore.updateMessage('Invalid word', 'red')
+        return
     }
-    
-    generalStore.addWordTried(currentWord.value);
-    
+
+    generalStore.addWordTried(currentWord.value)
+
     if (currentWord.value === generalStore.secretWord) {
-        generalStore.updateMessage('You won!', 'green');
+        generalStore.updateMessage('You won!', 'green')
     }
-    
-    generalStore.updateCurrentWord(''); 
+
+    generalStore.updateCurrentWord('')
 }
 </script>
 
@@ -77,5 +76,4 @@ async function submitWord() {
             </button>
         </div>
     </div>
-
 </template>
