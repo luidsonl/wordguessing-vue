@@ -27,32 +27,45 @@ const getLetterClass = (letter, rowIndex, colIndex) => {
 
   return 'bg-gray-200'
 }
+
+const letterSizeClass = computed(() => {
+  const w = boardWidth.value
+
+  if (w <= 4) return 'text-3xl'
+  if (w <= 6) return 'text-2xl'
+  if (w <= 8) return 'text-xl'
+  if (w <= 10) return 'text-lg'
+  return 'text-sm'
+})
 </script>
 
 
 <template>
+  <div class="flex justify-center px-2">
+    <div class="border p-2 rounded bg-white w-full max-w-screen-sm sm:max-w-md md:max-w-lg mb-5">
 
-    <div class="flex justify-center">
-        <div class="mx-2 border p-2 rounded max-w-md bg-white text-2xl mb-5 pb-5">
-            <div v-for="i in boardHeight" :key="i" class="mx-2 flex justify-center">
-                <div
-                    v-for="j in boardWidth"
-                    :key="j"
-                    class="w-20 min-h-10 border-b mx-2 flex items-end justify-center border-b-black"
-                    :class="getLetterClass(wordsTried[i - 1]?.[j - 1], i - 1, j - 1)"
-                >
-                    <span v-if="wordsTried[i - 1]?.[j - 1]">
-                        {{ wordsTried[i - 1][j - 1]?.toUpperCase() }}
-                    </span>
+      <div
+        v-for="i in boardHeight"
+        :key="i"
+        class="grid gap-2"
+        :style="`grid-template-columns: repeat(${boardWidth}, minmax(0, 1fr))`"
+      >
+        <div
+          v-for="j in boardWidth"
+          :key="j"
+          class="aspect-square border-b border-b-black flex items-end justify-center font-bold"
+          :class="getLetterClass(wordsTried[i - 1]?.[j - 1], i - 1, j - 1), letterSizeClass"
+        >
+          <span v-if="wordsTried[i - 1]?.[j - 1]">
+            {{ wordsTried[i - 1][j - 1]?.toUpperCase() }}
+          </span>
 
-                    <span v-else-if="currentLine === i - 1">
-                        {{ currentWord[j - 1]?.toUpperCase() ?? '' }}
-                    </span>
-                </div>
-            </div>
+          <span v-else-if="currentLine === i - 1">
+            {{ currentWord[j - 1]?.toUpperCase() ?? '' }}
+          </span>
         </div>
-        
+      </div>
+
     </div>
-
-
+  </div>
 </template>

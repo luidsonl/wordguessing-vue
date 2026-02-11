@@ -7,7 +7,7 @@ const generalStore = useGeneralStore();
 </script>
 
 <template>
-    <header class="bg-gray-800 text-white p-4 text-center text-base font-bold flex items-center justify-around">
+    <header class="bg-gray-800 text-white p-4 text-center text-base font-bold flex items-center justify-around mb-4">
         <span>Word Guessing Game</span>
         <nav>
             <button v-if="generalStore.gameRunning" class="cursor-pointer px-6 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors cursor" v-on:click="generalStore.reset">Reset</button>

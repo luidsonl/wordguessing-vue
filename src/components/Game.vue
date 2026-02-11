@@ -13,6 +13,7 @@ const wordStore = useWordStore();
 </script>
 
 <template>
+  <div>
     <div class="min-h-20">
       <GameMessage 
       v-if="generalStore.message.message" 
@@ -23,5 +24,7 @@ const wordStore = useWordStore();
     <Board/>
     <GameOver v-if="generalStore.gameOver"/>
     <Keyboard v-else/>
+  </div>
+  
     
 </template>

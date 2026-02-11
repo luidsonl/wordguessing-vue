@@ -73,7 +73,7 @@ function isSelected(r, c) {
 </script>
 
 <template>
-  <div class="space-y-4">
+  <div class="space-y-4 mb-4">
     <table
       class="w-full table-fixed border-collapse select-none touch-none" 
       @mouseup="stopSelect"

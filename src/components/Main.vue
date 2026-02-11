@@ -11,10 +11,12 @@ const generalStore = useGeneralStore()
 </script>
 
 <template>
-    <main class="bg-gray-100 min-h-svh p-0">
+    <main class="bg-gray-100 min-h-svh p-0 flex flex-col">
         <Header/>
-        <Game v-if="generalStore.gameRunning" />
-        <StartPanel v-else />
+        <div class="flex-1 flex items-center justify-center">
+            <Game v-if="generalStore.gameRunning" />
+            <StartPanel v-else />
+        </div>
         <Footer/>
     </main>
 </template>
